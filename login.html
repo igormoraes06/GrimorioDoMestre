@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar | Grimório do Mestre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700&family=IM+Fell+English+SC&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="imgs/ico.ico" type="image/x-icon">
+</head>
+
+<body class="pagina-auth">
+  <header class="topo">
+    <img class="auth-logo" src="imgs/logo.png" alt="Grimório do Mestre" width="600" height="200">
+    <p>Crie sua conta ou entre e ganhe um grimório só seu, perfeito para organizar sua mesa de RPG como ninguém.</p>
+  </header>
+
+  <!-- Fica oculto até o Firebase confirmar que não há ninguém logado -->
+  <main hidden>
+    <div class="caixa auth-caixa">
+      <div class="auth-abas" role="tablist">
+        <button type="button" class="auth-aba ativa" data-auth="login">Entrar</button>
+        <button type="button" class="auth-aba" data-auth="registro">Criar conta</button>
+      </div>
+
+      <!-- LOGIN: e-mail e senha -->
+      <form id="form-login">
+        <label for="login-email">E-mail</label>
+        <input id="login-email" type="email" autocomplete="email" required>
+
+        <label for="login-senha">Senha</label>
+        <input id="login-senha" type="password" autocomplete="current-password" required>
+
+        <div class="acoes">
+          <button type="submit" class="botao">Entrar</button>
+        </div>
+      </form>
+
+      <!-- REGISTRO: nome, e-mail, senha e confirmação -->
+      <form id="form-registro" hidden>
+        <label for="registro-nome">Nome</label>
+        <input id="registro-nome" type="text" maxlength="60" autocomplete="name" required>
+
+        <label for="registro-email">E-mail</label>
+        <input id="registro-email" type="email" autocomplete="email" required>
+
+        <label for="registro-senha">Senha (mínimo de 6 caracteres)</label>
+        <input id="registro-senha" type="password" minlength="6" autocomplete="new-password" required>
+
+        <label for="registro-confirmar">Confirmar senha</label>
+        <input id="registro-confirmar" type="password" minlength="6" autocomplete="new-password" required>
+
+        <div class="acoes">
+          <button type="submit" class="botao">Criar conta</button>
+        </div>
+      </form>
+
+      <div id="auth-status" class="status" role="alert"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p> 2026 | Grimório do Mestre. Todos os direitos reservados.</p>
+  </footer>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+
+</html>

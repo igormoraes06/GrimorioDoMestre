@@ -1,0 +1,63 @@
+Grimório do Mestre
+
+Site para mestres de RPG pesquisarem monstros e magias de D&D 5e, salvarem seus favoritos em um grimório pessoal (com notas e tags)
+e registrarem os acontecimentos na mesa.
+
+O site foi idealizado e construído pelos estudantes de Licenciatura da Computação, Igor Duarte e Bruno Familiar,
+na sede do Instituto Federal de Ciências e Tecnologias do Rio de Janeiro - IFRJ, campus pinheiral, durante
+as aulas ministradas pelo professor Alex Moreira Fonseca, na disciplina de WEB II, em 2026-2.
+
+Publicação no GitHub:
+
+===LINK===
+
+O que foi usado para construção do site (como requisito parcial para obtenção de nota da disciplina): 
+
+- HTML, CSS e JavaScript puro sem frameworks;
+- API: D&D 5e API (https://www.dnd5eapi.co/api);
+- Banco de dados: Firebase Cloud Firestore (para 'grimorio' e 'encontros').
+
+Funcionalidades:
+
+- Javascript (Buscar): pesquisa monstros ou magias por nome, com indicador de carregamento e tratamento de erros;
+- Firebase Cloud Firestore (Meu grimório e Encontros): salvar com nota e tags, listar, editar nota/tags e excluir. Filtros por nome, tipo, CR e tag.
+
+Como usar nosso Grimório do Mestre:
+
+1. Na aba inicial Buscar, você pesquisa por monstros e magias a fim de encontrar o feitiço ou criatura desejada;
+1.1. Para isso, é necessário que você busque pela categoria do monstro/magia em inglês
+(⚠ Não se preocupre quanto a este fator, após concluir a busca, você irá encontrar o que deseja traduzido para PT-BR.
+A razão quanto a este problema é que a API usada para encontrar uma grande listagem de monstros e poderes não possui uma
+tradução direta. Entretanto, nosso HTML se esforça para entregá-lo uma tradução livre);
+
+2. Após encontrar o que deseja, clique em Ver e salvar, escreva uma nota, adicione tags separadas por vírgula (⚠ Opcional) e salve;
+
+3. Na aba Meu grimório, filtre, edite ou exclua seus favoritos;
+
+4. Em Encontros, dê um nome, marque os monstros e salve o encontro.
+
+⚠ Observação ⚠
+
+As regras do Firestore em modo de teste deixam o banco aberto por tempo limitado.
+Este projeto não tem login, então todos os visitantes compartilham o mesmo grimório.
+
+
+
+## Como executar
+
+1. No [Console do Firebase](https://console.firebase.google.com), crie um projeto e adicione um app Web.
+2. Ative o **Cloud Firestore** (modo de teste para desenvolvimento).
+3. Copie o `firebaseConfig` para `js/firebase.js`.
+4. Como o projeto usa módulos ES, abra com um servidor local (por exemplo, extensão **Live Server** do VS Code). Abrir o arquivo direto no navegador não funciona.
+5. Publique no Firebase Hosting ou no GitHub Pages e coloque o link acima.
+
+
+## Capturas de tela
+
+![Busca](img/busca.png)
+![Grimório](img/grimorio.png)
+![Encontros](img/encontros.png)
+![Versão celular](img/celular.png)
+
+> Tire as capturas com o site rodando e salve na pasta `img/`.
+

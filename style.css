@@ -1,0 +1,561 @@
+/* ===== Variáveis de tema ===== */
+:root {
+  --fundo: #271b15;
+  --superficie: #403223;
+  --superficie-2: #4e3b2c;
+  --texto: #ece8f5;
+  --texto-suave: #cbcaae;
+  --destaque: #b3844f;
+  --destaque-escuro: #381a08;
+  --perigo: #c9546a;
+  --borda: #684f3e;
+  --raio: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Sem isso, "header { display: flex }" vence o atributo hidden */
+[hidden] {
+  display: none !important;
+}
+
+header {
+  display: flex;
+  flex-direction: column; /* Alinha os elementos um abaixo do outro */
+  align-items: center;    /* Centraliza todos os blocos na horizontal */
+  text-align: center;     /* Garante que os textos longos também fiquem centralizados */
+  width: 100%;            /* Garante que o header ocupe toda a largura */
+}
+
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: "Alegreya", Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== Topo e navegação ===== */
+.topo {
+  padding: 2rem 1rem 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.topo p {
+  color: var(--texto-suave);
+  margin: 0.25rem 0 1.5rem;
+  max-width: 60ch;
+}
+
+/* O body é uma coluna flex com min-height: 100vh e o main tem flex: 1, então o footer
+   fica sempre no fim do conteúdo: no rodapé da janela se a página for curta e depois do
+   conteúdo se for longa. margin-top: auto mantém isso mesmo com o main oculto. */
+footer {
+  margin-top: auto;
+  padding: 1.25rem;
+  text-align: center;
+  color: var(--texto-suave);
+  background: var(--borda);
+}
+
+.abas {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--borda);
+  overflow-x: auto;
+}
+
+.aba {
+  background: none;
+  border: 0;
+  color: var(--texto-suave);
+  font: inherit;
+  padding: 0.7rem 1.1rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.aba:hover {
+  color: var(--texto);
+}
+
+.aba.ativa {
+  color: var(--texto);
+  border-bottom-color: var(--destaque);
+}
+
+.contador {
+  background: var(--superficie-2);
+  border-radius: 999px;
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
+
+/* ===== Layout geral ===== */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+  flex: 1;
+  width: 100%;
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.barra input {
+  flex: 1 1 220px;
+}
+
+input,
+select,
+textarea {
+  background: var(--superficie);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  width: 100%;
+}
+
+.barra select {
+  width: auto;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+label {
+  display: block;
+  margin: 0.9rem 0 0.25rem;
+  color: var(--texto-suave);
+}
+
+/* ===== Botões ===== */
+.botao {
+  background: var(--destaque);
+  color: #0f2a25;
+  border: 0;
+  border-radius: var(--raio);
+  padding: 0.6rem 1.1rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: #c7c569;
+}
+
+.botao.secundario {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borda);
+}
+
+.botao.secundario:hover {
+  background: var(--superficie-2);
+}
+
+.botao.perigo {
+  background: transparent;
+  color: var(--perigo);
+  border: 1px solid var(--perigo);
+}
+
+.botao.perigo:hover {
+  background: var(--perigo);
+  color: #fff;
+}
+
+.botao.pequeno {
+  padding: 0.35rem 0.8rem;
+  font-size: 1rem;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+
+/* ===== Cards ===== */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.card .meta {
+  color: var(--texto-suave);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.card .nota {
+  margin: 0;
+  font-style: italic;
+}
+
+.card .acoes {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag {
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 0 0.6rem;
+  font-size: 0.95rem;
+}
+
+/* ===== Formulários em caixa ===== */
+.caixa {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.caixa h2 {
+  margin: 0 0 0.5rem;
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-weight: 400;
+}
+
+fieldset {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  margin: 1rem 0 0;
+}
+
+.opcoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.4rem;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.opcoes label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0;
+  color: var(--texto);
+}
+
+.opcoes input {
+  width: auto;
+}
+
+/* ===== Status, janela e avisos ===== */
+.status {
+  min-height: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: var(--texto-suave);
+}
+
+.status.erro {
+  color: var(--perigo);
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  border: 3px solid var(--borda);
+  border-top-color: var(--destaque);
+  border-radius: 50%;
+  vertical-align: -2px;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+dialog {
+  background: var(--superficie);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  width: min(640px, 94vw);
+  max-height: 90vh;
+  padding: 1.25rem;
+}
+
+dialog::backdrop {
+  background: rgba(10, 8, 20, 0.7);
+}
+
+dialog h2 {
+  margin-top: 0;
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+.detalhes p {
+  margin: 0.2rem 0;
+}
+
+.atributos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0.6rem 0;
+  color: var(--texto-suave);
+}
+
+#toasts {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--superficie-2);
+  border-left: 5px solid var(--destaque);
+  padding: 0.7rem 1rem;
+  border-radius: var(--raio);
+  max-width: 420px;
+}
+
+.toast.erro {
+  border-left-color: var(--perigo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 3s;
+  }
+}
+
+/* ===== Aba: Anotações sobre a sessão ===== */
+#calendario {
+  --fc-border-color: var(--borda);
+  --fc-page-bg-color: var(--superficie);
+  --fc-neutral-bg-color: var(--superficie-2);
+  --fc-today-bg-color: rgba(179, 132, 79, 0.2);
+  --fc-button-bg-color: var(--destaque);
+  --fc-button-border-color: var(--destaque);
+  --fc-button-text-color: #0f2a25;
+  --fc-button-hover-bg-color: #c7c569;
+  --fc-button-hover-border-color: #c7c569;
+  --fc-button-active-bg-color: #c7c569;
+  --fc-button-active-border-color: #c7c569;
+  --fc-event-text-color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.75rem;
+}
+
+#calendario .fc-toolbar-title {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-weight: 400;
+}
+
+#calendario .fc-daygrid-day {
+  cursor: pointer;
+}
+
+#calendario a {
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.legenda {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  padding: 0;
+  margin: 0.8rem 0 0;
+  color: var(--texto-suave);
+}
+
+.ponto {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+
+.ponto-salvo {
+  background: #b3844f;
+}
+
+.ponto-pendente {
+  background: #cbcaae;
+}
+
+.aviso-pendencias {
+  align-self: center;
+  color: var(--texto-suave);
+}
+
+.seletor {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.seletor input {
+  flex: 1;
+}
+
+#sessao-monstros,
+#sessao-feiticos {
+  margin-top: 0.5rem;
+  min-height: 1.5rem;
+}
+
+.tag button {
+  background: none;
+  border: 0;
+  color: var(--texto-suave);
+  cursor: pointer;
+  font: inherit;
+  margin-left: 0.3rem;
+}
+
+.tag button:hover {
+  color: var(--perigo);
+}
+
+progress {
+  width: 100%;
+  height: 1rem;
+  accent-color: var(--destaque);
+}
+
+input[type="range"] {
+  padding: 0;
+  border: 0;
+  background: none;
+  accent-color: var(--destaque);
+}
+
+.dica {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  margin: 0.8rem 0 0;
+}
+
+@media (max-width: 600px) {
+  #calendario .fc-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* ===== Login / registro e barra do usuário ===== */
+.usuario-barra {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1100px;
+  color: var(--texto-suave);
+}
+
+.pagina-auth main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1rem;
+}
+
+.auth-logo {
+  max-width: 100%;
+  height: auto;
+}
+
+.auth-caixa {
+  width: min(440px, 100%);
+}
+
+.auth-abas {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+.auth-aba {
+  background: none;
+  border: 0;
+  color: var(--texto-suave);
+  font: inherit;
+  padding: 0.7rem 1.1rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.auth-aba:hover {
+  color: var(--texto);
+}
+
+.auth-aba.ativa {
+  color: var(--texto);
+  border-bottom-color: var(--destaque);
+}
+
+.auth-caixa .botao {
+  width: 100%;
+}

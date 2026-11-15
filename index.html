@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grimório do Mestre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700&family=IM+Fell+English+SC&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="imgs/ico.ico" type="image/x-icon">
+
+</head>
+
+<body>
+  <header class="topo" hidden>
+    <div class="usuario-barra">
+      <span>Olá, <strong id="usuario-nome"></strong></span>
+      <button type="button" class="botao secundario pequeno" id="btn-sair">Sair</button>
+    </div>
+    <img src="imgs/logo.png" alt="Logo" width="600" height="200">
+    <p>Pesquise monstros e magias de D&amp;D 5e, guarde os favoritos e monte seus encontros.</p>
+    <nav class="abas" aria-label="Navegação principal">
+      <button class="aba ativa" data-aba="buscar">Buscar</button>
+      <button class="aba" data-aba="grimorio">Meu grimório <span id="contador-grimorio"
+          class="contador">0</span></button>
+      <button class="aba" data-aba="encontros">Encontros</button>
+      <button class="aba" data-aba="sessoes">Anotações sobre a sessão</button>
+    </nav>
+  </header>
+
+  <main hidden>
+    <!-- ABA 1: BUSCA NA API -->
+    <section id="aba-buscar" class="painel">
+      <form id="form-busca" class="barra">
+        <select id="busca-tipo" aria-label="Tipo de busca">
+          <option value="monsters">Monstros</option>
+          <option value="spells">Magias</option>
+        </select>
+        <input id="busca-texto" type="search" placeholder="Nome (ex.: goblin, fireball). Vazio lista tudo.">
+        <button type="submit" class="botao">Pesquisar</button>
+      </form>
+      <div id="busca-status" class="status" role="status"></div>
+      <div id="busca-resultados" class="grade"></div>
+    </section>
+
+    <!-- ABA 2: GRIMÓRIO (CRUD 1) -->
+    <section id="aba-grimorio" class="painel" hidden>
+      <div class="barra">
+        <input id="filtro-texto" type="search" placeholder="Buscar por nome ou nota">
+        <select id="filtro-tipo" aria-label="Filtrar por tipo">
+          <option value="">Todos os tipos</option>
+          <option value="monsters">Monstros</option>
+          <option value="spells">Magias</option>
+        </select>
+        <select id="filtro-cr" aria-label="Filtrar por CR">
+          <option value="">Qualquer CR</option>
+          <option value="0-1">CR 0 a 1</option>
+          <option value="2-4">CR 2 a 4</option>
+          <option value="5-9">CR 5 a 9</option>
+          <option value="10+">CR 10 ou mais</option>
+        </select>
+        <select id="filtro-tag" aria-label="Filtrar por tag">
+          <option value="">Todas as tags</option>
+        </select>
+      </div>
+      <div id="grimorio-status" class="status" role="status"></div>
+      <div id="grimorio-lista" class="grade"></div>
+    </section>
+
+    <!-- ABA 3: ENCONTROS (CRUD 2) -->
+    <section id="aba-encontros" class="painel" hidden>
+      <form id="form-encontro" class="caixa">
+        <h2 id="titulo-form-encontro">Novo encontro</h2>
+        <label for="encontro-nome">Nome do encontro</label>
+        <input id="encontro-nome" type="text" maxlength="60" placeholder="Ex.: Emboscada na estrada" required>
+        <fieldset>
+          <legend>Monstros do grimório</legend>
+          <div id="encontro-monstros" class="opcoes"></div>
+        </fieldset>
+        <div class="acoes">
+          <button type="submit" class="botao" id="btn-salvar-encontro">Salvar encontro</button>
+          <button type="button" class="botao secundario" id="btn-cancelar-encontro" hidden>Cancelar edição</button>
+        </div>
+      </form>
+      <div id="encontros-status" class="status" role="status"></div>
+      <div id="encontros-lista" class="grade"></div>
+    </section>
+
+    <!-- ABA 4: ANOTAÇÕES SOBRE A SESSÃO (CRUD 3) -->
+    <section id="aba-sessoes" class="painel" hidden>
+      <div class="barra">
+        <button type="button" class="botao" id="btn-salvar-sessoes" disabled>Salvar</button>
+        <button type="button" class="botao secundario" id="btn-descartar-sessoes" disabled>Descartar alterações</button>
+        <span id="aviso-pendencias" class="aviso-pendencias" role="status"></span>
+      </div>
+      <div id="sessoes-status" class="status" role="status"></div>
+      <div id="calendario"></div>
+      <ul class="legenda">
+        <li><span class="ponto ponto-salvo"></span> Sessão salva</li>
+        <li><span class="ponto ponto-pendente"></span> Alteração não salva</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Janela para ver detalhes / salvar / editar -->
+  <dialog id="modal">
+    <form id="form-modal" method="dialog">
+      <h2 id="modal-titulo"></h2>
+      <div id="modal-detalhes"></div>
+      <label for="modal-nota">Nota pessoal</label>
+      <textarea id="modal-nota" rows="3" maxlength="500"
+        placeholder="Como você usa este monstro/magia na mesa?"></textarea>
+      <label for="modal-tags">Tags (separadas por vírgula)</label>
+      <input id="modal-tags" type="text" placeholder="chefe, área urbana, nível baixo">
+      <div class="acoes">
+        <button type="submit" class="botao" id="modal-confirmar">Salvar</button>
+        <button type="button" class="botao secundario" id="modal-fechar">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Janela do registro de sessão (criar / ver / editar / excluir) -->
+  <dialog id="modal-sessao">
+    <form id="form-sessao">
+      <h2 id="sessao-titulo"></h2>
+
+      <label for="sessao-descricao">Descrição da sessão</label>
+      <textarea id="sessao-descricao" rows="5" maxlength="2000"
+        placeholder="Acontecimentos, decisões, eventos importantes..."></textarea>
+
+      <label for="sessao-monstro">Monstros encontrados</label>
+      <div class="seletor">
+        <input id="sessao-monstro" list="lista-monstros" placeholder="Nome em inglês (ex.: goblin)" autocomplete="off">
+        <button type="button" class="botao secundario pequeno" id="btn-add-monstro">Adicionar</button>
+      </div>
+      <datalist id="lista-monstros"></datalist>
+      <div id="sessao-monstros" class="tags"></div>
+
+      <label for="sessao-feitico">Feitiços utilizados</label>
+      <div class="seletor">
+        <input id="sessao-feitico" list="lista-feiticos" placeholder="Nome em inglês (ex.: fireball)" autocomplete="off">
+        <button type="button" class="botao secundario pequeno" id="btn-add-feitico">Adicionar</button>
+      </div>
+      <datalist id="lista-feiticos"></datalist>
+      <div id="sessao-feiticos" class="tags"></div>
+
+      <label for="sessao-progresso">Progresso da campanha: <output id="sessao-valor">0%</output></label>
+      <progress id="sessao-barra" max="100" value="0"></progress>
+      <input id="sessao-progresso" type="range" min="0" max="100" step="5" value="0">
+
+      <div class="acoes">
+        <button type="submit" class="botao">Confirmar</button>
+        <button type="button" class="botao perigo" id="btn-excluir-sessao" hidden>Excluir registro</button>
+        <button type="button" class="botao secundario" id="sessao-fechar">Cancelar</button>
+      </div>
+      <p class="dica">Confirmar mantém a alteração como pendente. Ela só é gravada ao clicar em Salvar na aba.</p>
+    </form>
+  </dialog>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <!-- FullCalendar (calendário da aba de sessões) -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales-all.global.min.js"></script>
+  <footer hidden>
+    <p> 2026 | Grimório do Mestre. Todos os direitos reservados.</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
