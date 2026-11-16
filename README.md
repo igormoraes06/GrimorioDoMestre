@@ -22,7 +22,7 @@ as aulas ministradas pelo professor Alex Moreira Fonseca, na disciplina de WEB I
 
 1. Na aba inicial Buscar, você pesquisa por monstros e magias a fim de encontrar o feitiço ou criatura desejada;
 1.1. Para isso, é necessário que você busque pela categoria do monstro/magia em inglês
-(⚠ Não se preocupre quanto a este fator, após concluir a busca, você irá encontrar o que deseja traduzido para PT-BR.
+(⚠ Não se preocupe quanto a este fator, após concluir a busca, você irá encontrar o que deseja traduzido para PT-BR.
 A razão quanto a este problema é que a API usada para encontrar uma grande listagem de monstros e poderes não possui uma
 tradução direta. Entretanto, nosso HTML se esforça para entregá-lo uma tradução livre);
 
@@ -30,9 +30,10 @@ tradução direta. Entretanto, nosso HTML se esforça para entregá-lo uma tradu
 
 3. Na aba Meu grimório, filtre, edite ou exclua seus favoritos;
 
-4. Em Encontros, dê um nome, marque os monstros e salve o encontro.
+4. Em Encontros, crie possíveis confrontos, marque os monstros e salve o encontro.
+
+5. Em anotações, marque no calendário os dias em que ocorreram e/ou ocorrerão as sessões, e escreva sobre elas.
 
 ## ⚠ Observação ⚠
 
 As regras do Firestore em modo de teste deixam o banco aberto por tempo limitado.
-Este projeto não tem login, então todos os visitantes compartilham o mesmo grimório.
